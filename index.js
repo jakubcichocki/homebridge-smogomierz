@@ -4,6 +4,7 @@ var Service, Characteristic;
 var airQualitySensorService;
 var temperatureSensorService;
 var humiditySensorService;
+var lightSensorService;
 var request = require('request');
 
 module.exports = function (homebridge) {
@@ -17,7 +18,8 @@ const DataType = {
     PM10: 'pm10Type',
     AIRQUALITY: 'airQualityType',
     TEMPERATURE: 'temperatureType',
-    HUMIDITY: 'humidityType'
+    HUMIDITY: 'humidityType',
+    LIGHT: 'lightType'
 };
 
 class SmogomierzRepository {
@@ -166,6 +168,15 @@ SmogomierzSensor.prototype = {
             next
         )
     },
+    getLight: function(next) {
+        var self = this
+
+        self._getData(
+            lightSensorService,
+            DataType.LIGHT,
+            next
+        )
+    },
 
     identify: function (callback) {
         this.log("Identify requested!");
@@ -229,6 +240,19 @@ SmogomierzSensor.prototype = {
 
         services.push(humiditySensorService);
 
+        /**
+         * lightSensorService
+         */
+        let lightName = this.servicesNames['light'] || "Light"
+        lightSensorService = new Service.LightSensor(lightName)
+
+        lightSensorService
+            .getCharacteristic(Characteristic.CurrentAmbientLightLevel)
+            .on('get', this.getLight.bind(this));
+
+        services.push(lightSensorService);
+
+
         return services;
     },
 
@@ -268,6 +292,14 @@ SmogomierzSensor.prototype = {
                 case DataType.HUMIDITY:
                     typeName = "Humidity"
                     value = data.humidity
+                    break;
+                     case DataType.HUMIDITY:
+                    typeName = "Humidity"
+                    value = data.humidity
+                    break;
+                case DataType.LIGHT:
+                    typeName = "Light"
+                    value = data.photo
                     break;
                 default:
                     let error = new Error("Unknown data type: " + type)
