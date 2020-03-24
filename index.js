@@ -248,6 +248,10 @@ SmogomierzSensor.prototype = {
 
         lightSensorService
             .getCharacteristic(Characteristic.CurrentAmbientLightLevel)
+            .setProps({
+                minValue: 0,
+                maxValue: 100
+            })
             .on('get', this.getLight.bind(this));
 
         services.push(lightSensorService);
