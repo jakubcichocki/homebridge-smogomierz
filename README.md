@@ -5,6 +5,8 @@
 
 **Fork with light ambient service, it work only with Smogomierz (Smogly curently) fork https://github.com/jakubcichocki/Smogomierz.**
 
+![Screenshot](https://github.com/jakubcichocki/homebridge-smogomierz/blob/master/IMG_3141.PNG)
+
 Project is based on [homebridge-airly](https://github.com/beniaminrychter/homebridge-airly).
 
 
