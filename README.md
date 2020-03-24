@@ -3,7 +3,10 @@
 
 **Homebridge plugin for showing air condition data from [Smogomierz](https://github.com/hackerspace-silesia/Smogomierz) sensor.**
 
+**Fork with light ambient service, it work only with Smogomierz (Smogly curently) fork https://github.com/jakubcichocki/Smogomierz.**
+
 Project is based on [homebridge-airly](https://github.com/beniaminrychter/homebridge-airly).
+
 
 ## Instalation
 1. Install Homebridge using: `(sudo) npm install -g --unsafe-perm homebridge`.
